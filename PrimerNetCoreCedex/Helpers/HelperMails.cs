@@ -30,7 +30,7 @@ namespace PrimerNetCoreCedex.Helpers
             smtp.Host = smtpServer;
             smtp.Port = 587;
             smtp.EnableSsl = true;
-            smtp.UseDefaultCredentials = true;
+            smtp.UseDefaultCredentials = false;
             NetworkCredential credentials =
                 new NetworkCredential(userEmail, password);
             await smtp.SendMailAsync(message);
