@@ -1,0 +1,23 @@
+﻿@model List<Empleado>
+
+<h1>Empleados EF Net Core</h1>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>APELLIDO</th>
+            <th>OFICIO</th>
+            <th>SALARIO</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Empleado emp in Model)
+        {
+            <tr>
+                <td>@emp.Apellido</td>
+                <td>@emp.Oficio</td>
+                <td>@emp.Salario</td>
+            </tr>
+        }
+    </tbody>
+</table>

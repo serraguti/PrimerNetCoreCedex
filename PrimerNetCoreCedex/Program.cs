@@ -1,6 +1,17 @@
+using Microsoft.EntityFrameworkCore;
+using PrimerNetCoreCedex.Data;
+using PrimerNetCoreCedex.Repositories;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//RECUPERAMOS LA CADENA DE CONEXION DE APPSETTINGS
+string connectionString =
+    builder.Configuration.GetConnectionString("SqlServer");
+//RESOLVEMOS LAS DEPENDENCIAS
+builder.Services.AddTransient<RepositoryEmpleados>();
+builder.Services.AddDbContext<EmpleadosContext>
+    (options => options.UseSqlServer(connectionString));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
