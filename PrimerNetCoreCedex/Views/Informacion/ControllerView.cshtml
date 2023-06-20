@@ -1,6 +1,11 @@
-﻿<h1>Info Controller --> View</h1>
+﻿@model Persona
+
+<h1>Info Controller --> View</h1>
+
+<h1 style="color:blue">
+    Model @Model.Nombre, Edad: @Model.Edad, Email: @Model.Email
+</h1>
 
 <h2 style="color:red">Nombre: @ViewData["NOMBRE"]</h2>
 <h2 style="color:red">Edad: @ViewData["EDAD"]</h2>
-<h2 style="color:red">Edad: @ViewData["PACO"]</h2>
 
