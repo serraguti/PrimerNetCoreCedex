@@ -1,0 +1,37 @@
+﻿@model List<Empleado>
+
+<h1>Session Empleados IDS</h1>
+<a asp-controller="EmpleadosSession"
+   asp-action="CarritoEmpleadosIds">
+    Ver Carrito Empleados Session IDs
+</a>
+<h2 style="color:blue">
+    @ViewData["MENSAJE"]
+</h2>
+<table class="table table-danger">
+    <thead>
+        <tr>
+            <th>APELLIDO</th>
+            <th>OFICIO</th>
+            <th>SALARIO</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Empleado emp in Model)
+        {
+            <tr>
+                <td>@emp.Apellido</td>
+                <td>@emp.Oficio</td>
+                <td>@emp.Salario</td>
+                <td>
+                    <a asp-controller="EmpleadosSession"
+                       asp-action="SessionEmpleadosIds"
+                       asp-route-idempleado="@emp.IdEmpleado">
+                        Almacenar Empleado IDS
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

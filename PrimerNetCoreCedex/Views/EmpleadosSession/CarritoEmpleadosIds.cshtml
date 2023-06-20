@@ -1,0 +1,28 @@
+﻿@using PrimerNetCoreCedex.Extensions;
+<h1>Empleados almacenados IDS</h1>
+
+@{
+    List<int> empleadosIds =
+            Context.Session.GetObject<List<int>>("EMPLEADOSIDS");
+}
+
+<a asp-controller="EmpleadosSession"
+   asp-action="SessionEmpleadosIds">
+    Back to List
+</a>
+
+@if (empleadosIds != null)
+{
+    <ul class="list-group">
+        @foreach (int num in empleadosIds)
+        {
+            <li class="list-group-item">@num</li>
+        }
+    </ul>
+}
+else
+{
+    <h1 style="color:red">
+        No hay empleados en el carrito
+    </h1>
+}
