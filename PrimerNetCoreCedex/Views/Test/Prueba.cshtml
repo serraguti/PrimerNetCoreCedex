@@ -1,0 +1,29 @@
+﻿@*
+    PONER COMENTARIOS: CONTROL + K + C
+    QUITAR COMENTARIOS: CONTROL + K + U
+*@
+@{
+    //CODIGO PURO C#
+    //DECLARAMOS VARIABLES
+    int numero = 14;
+    string dato = "Hoy es martes";
+    dato = dato.ToUpper();
+}
+
+DIBUJAR VARIABLES
+<h2 style="color:red">El numero es @numero</h2>
+<h2 style="color:green">@dato</h2>
+
+<h1 style="color:blue">Soy la página Prueba de Test!!!</h1>
+
+TENEMOS LA POSIBILIDAD DE TENER CODIGO LOGICO
+NO EXISTE INICIO NI FINAL. ES INTELIGENTE, SABE CUANDO INICIO Y CUANDO ACABA
+@if (numero >= 0){
+    //TODO ES CODIGO C#
+    dato = "POSITIVO";
+    //SI VISUALIZA UNA ETIQUETA HTML, CAMBIA LA LOGICA
+    <h1>POSITIVO</h1>
+}else{
+    dato = "NEGATIVO";
+    <h1>NEGATIVO</h1>
+}
