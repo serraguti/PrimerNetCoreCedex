@@ -1,0 +1,47 @@
+﻿@model List<Empleado>
+
+@{
+    //UN VIEWDATA NO SABE LA PAGINA LO QUE LLEVA DENTRO
+    //DEBEMOS CONVERTIRLO PARA PODER UTILIZARLO COMO COLECCION
+    //DENTRO DE LA PAGINA
+    List<string> oficiosList = ViewData["OFICIOS"] as List<string>;
+}
+
+<h1 style="color:blue">Buscador de empleados</h1>
+
+<form method="post">
+    <label>Seleccione Oficio: </label>
+    <select name="oficio" class="form-control">
+        @foreach (string ofi in oficiosList)
+        {
+            <option value="@ofi">@ofi</option>
+        }
+    </select>
+    <button class="btn btn-outline-danger">
+        Buscar empleados
+    </button>
+</form>
+
+@if (Model != null)
+{
+    <table class="table table-info">
+        <thead>
+            <tr>
+                <th>APELLIDO</th>
+                <th>OFICIO</th>
+                <th>SALARIO</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Empleado emp in Model)
+            {
+                <tr>
+                    <td>@emp.Apellido</td>
+                    <td>@emp.Oficio</td>
+                    <td>@emp.Salario</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
