@@ -10,28 +10,28 @@ namespace PrimerNetCoreCedex.Extensions
         //LA CONVIERTE A JSON Y LA ALMACENA COMO STRING
         //DENTRO DE SESSION
         public static void SetObject
-            (this ISession session, string key, List<Empleado> empleados)
+            (this ISession session, string key, object value)
         {
-            string jsonEmpleados = JsonConvert.SerializeObject(empleados);
-            session.SetString(key, jsonEmpleados);
+            string json = JsonConvert.SerializeObject(value);
+            session.SetString(key, json);
         }
 
-        //NECESITAMOS UN METODO PARA PODER RECUPERAR LOS EMPLEADOS DE 
-        //SESSION.  NOS DARAN LA KEY Y LE DEVOLVEMOS EL OBJETO EMPLEADO
-        public static List<Empleado> GetObject
+        //NECESITAMOS UN METODO PARA PODER RECUPERAR CUALQUIER OBJETO
+        //DE SESSION.  NOS DARAN LA KEY Y LE DEVOLVEMOS CUALQUIER OBJETO
+        public static T GetObject<T>
             (this ISession session, string key)
         {
             //RECUPERAMOS LOS DATOS DE SESSION
-            string jsonEmpleados = session.GetString(key);
-            if (jsonEmpleados == null)
+            string json = session.GetString(key);
+            if (json == null)
             {
-                return null;
+                return default(T);
             }
             else
             {
-                List<Empleado> empleados = 
-                    JsonConvert.DeserializeObject<List<Empleado>>(jsonEmpleados);
-                return empleados;
+                T data = 
+                    JsonConvert.DeserializeObject<T>(json);
+                return data;
             }
         }
     }

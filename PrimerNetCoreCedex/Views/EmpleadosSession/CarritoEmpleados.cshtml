@@ -3,7 +3,7 @@
 
 @{
     List<Empleado> empleados =
-            Context.Session.GetObject("EMPLEADOS");
+            Context.Session.GetObject<List<Empleado>>("EMPLEADOS");
 }
 
 <a asp-controller="EmpleadosSession"

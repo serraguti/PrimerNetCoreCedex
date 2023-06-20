@@ -22,9 +22,9 @@ namespace PrimerNetCoreCedex.Controllers
                 Empleado emp = await this.repo.FindEmpleadoAsync(idempleado.Value);
                 //DENTRO DE SESSION TENDREMOS UNA COLECCION DE EMPLEADOS
                 List<Empleado> empleadosSession;
-                if (HttpContext.Session.GetObject("EMPLEADOS") != null)
+                if (HttpContext.Session.GetObject<List<Empleado>>("EMPLEADOS") != null)
                 {
-                    empleadosSession = HttpContext.Session.GetObject("EMPLEADOS");
+                    empleadosSession = HttpContext.Session.GetObject<List<Empleado>>("EMPLEADOS");
                 }
                 else
                 {
