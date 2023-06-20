@@ -15,6 +15,12 @@ namespace PrimerNetCoreCedex.Repositories
 
         #region EMPLEADOS
 
+        public async Task<Empleado> FindEmpleadoAsync(int id)
+        {
+            return await this.context.Empleados
+                .FirstOrDefaultAsync(z => z.IdEmpleado == id);
+        }
+
         public async Task<List<string>> GetOficiosAsync()
         {
             var consulta = (from datos in this.context.Empleados

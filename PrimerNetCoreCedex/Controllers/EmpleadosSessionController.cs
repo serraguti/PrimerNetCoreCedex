@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PrimerNetCoreCedex.Extensions;
 using PrimerNetCoreCedex.Models;
 using PrimerNetCoreCedex.Repositories;
 
@@ -11,6 +12,37 @@ namespace PrimerNetCoreCedex.Controllers
         public EmpleadosSessionController(RepositoryEmpleados repo)
         {
             this.repo = repo;
+        }
+
+        public async Task<IActionResult> SessionEmpleados(int? idempleado)
+        {
+            if (idempleado != null)
+            {
+                //BUSCAMOS EL EMPLEADO
+                Empleado emp = await this.repo.FindEmpleadoAsync(idempleado.Value);
+                //DENTRO DE SESSION TENDREMOS UNA COLECCION DE EMPLEADOS
+                List<Empleado> empleadosSession;
+                if (HttpContext.Session.GetObject("EMPLEADOS") != null)
+                {
+                    empleadosSession = HttpContext.Session.GetObject("EMPLEADOS");
+                }
+                else
+                {
+                    empleadosSession = new List<Empleado>();
+                }
+                //AGREGAMOS EL NUEVO EMPLEADO A LA COLECCION
+                empleadosSession.Add(emp);
+                //ALMACENAMOS LA COLECCION EMPLEADOS EN SESSION
+                HttpContext.Session.SetObject("EMPLEADOS", empleadosSession);
+                ViewData["MENSAJE"] = "Numero de empleados almacenados: " + empleadosSession.Count;
+            }
+            List<Empleado> empleados = await this.repo.GetEmpleadosAsync();
+            return View(empleados);
+        }
+
+        public IActionResult CarritoEmpleados()
+        {
+            return View();
         }
 
         public IActionResult SumaSalarial()

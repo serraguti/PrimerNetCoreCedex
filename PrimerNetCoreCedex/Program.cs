@@ -6,6 +6,12 @@ using PrimerNetCoreCedex.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+});
+
 builder.Services.AddTransient<HelperMails>();
 builder.Services.AddTransient<HelperPathProvider>();
 //RECUPERAMOS LA CADENA DE CONEXION DE APPSETTINGS
@@ -33,6 +39,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+//EL ORDEN DE MIDDLEWARE ES IMPORTANTE!!!
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
