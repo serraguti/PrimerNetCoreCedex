@@ -6,6 +6,7 @@ using PrimerNetCoreCedex.Repositories;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddTransient<HelperMails>();
 builder.Services.AddTransient<HelperPathProvider>();
 //RECUPERAMOS LA CADENA DE CONEXION DE APPSETTINGS
 string connectionString =
