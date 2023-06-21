@@ -68,9 +68,20 @@ namespace PrimerNetCoreCedex.Controllers
             return View(empleados);
         }
 
-        public IActionResult CarritoEmpleadosIds()
+        public async Task<IActionResult> CarritoEmpleadosIds()
         {
-            return View();
+            //RECUPERAMOS LOS IDS DE SESSION
+            List<int> idsEmpleados = HttpContext.Session.GetObject<List<int>>("EMPLEADOSIDS");
+            if (idsEmpleados == null)
+            {
+                ViewData["MENSAJE"] = "No existen empleados en Session";
+                return View();
+            }
+            else
+            {
+                List<Empleado> empleados = await this.repo.GetEmpleadosSessionAsync(idsEmpleados);
+                return View(empleados);
+            }
         }
 
         public IActionResult SumaSalarial()

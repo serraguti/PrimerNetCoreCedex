@@ -15,6 +15,14 @@ namespace PrimerNetCoreCedex.Repositories
 
         #region EMPLEADOS
 
+        public async Task<List<Empleado>> GetEmpleadosSessionAsync(List<int> ids)
+        {
+            var consulta = from datos in this.context.Empleados
+                           where ids.Contains(datos.IdEmpleado)
+                           select datos;
+            return await consulta.ToListAsync();
+        }
+
         public async Task<Empleado> FindEmpleadoAsync(int id)
         {
             return await this.context.Empleados

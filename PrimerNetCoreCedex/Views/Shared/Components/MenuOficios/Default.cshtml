@@ -1,0 +1,11 @@
+﻿@model List<string>
+
+@foreach (string oficio in Model){
+    <li class="nav-item">
+        <a class="nav-link text-info"
+           asp-controller="Empleados"
+           asp-action="EmpleadosOficio">
+            @oficio
+        </a>
+    </li>
+}

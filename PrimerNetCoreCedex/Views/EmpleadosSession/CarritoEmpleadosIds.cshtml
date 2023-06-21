@@ -1,28 +1,21 @@
-﻿@using PrimerNetCoreCedex.Extensions;
+﻿@model List<Empleado>
 <h1>Empleados almacenados IDS</h1>
-
-@{
-    List<int> empleadosIds =
-            Context.Session.GetObject<List<int>>("EMPLEADOSIDS");
-}
 
 <a asp-controller="EmpleadosSession"
    asp-action="SessionEmpleadosIds">
     Back to List
 </a>
 
-@if (empleadosIds != null)
+<h1 style="color:red">
+    @ViewData["MENSAJE"]
+</h1>
+
+@if (Model != null)
 {
     <ul class="list-group">
-        @foreach (int num in empleadosIds)
+        @foreach (Empleado empleado in Model)
         {
-            <li class="list-group-item">@num</li>
+            <li class="list-group-item">@empleado.Apellido</li>
         }
     </ul>
-}
-else
-{
-    <h1 style="color:red">
-        No hay empleados en el carrito
-    </h1>
 }
